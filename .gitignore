@@ -1,3 +1,7 @@
+# Python
+*.pyc
+__pycache__
+
 # Prerequisites
 *.d
 
@@ -50,3 +54,21 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+*.txt
+*.png
+submissions.zip
+submissions
+answer_key
+*.csv
+*.xls
+*.xlsx
+
+# Bomb Lab
+bomb*
+
+# Cache Lab
+cachelab.tar
+cachelab/
+.csim_results
+.marker

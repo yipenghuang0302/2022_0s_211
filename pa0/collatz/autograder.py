@@ -94,21 +94,21 @@ def grade_collatz( path="./", verbose=False ):
         return score
 
     if test_collatz(0,path,verbose):
-        score += 2
+        score += 4
         if test_collatz(1,path,verbose):
-            score += 2
+            score += 4
             if test_collatz(2,path,verbose):
-                score += 2
+                score += 4
                 if test_collatz(3,path,verbose):
-                    score+= 2
+                    score+= 4
                     allPass = True
                     for filenum in range(8,16):
                         generate_test ( filenum, max=65536, path=path )
                         allPass &= test_collatz(filenum,path,verbose)
                     if allPass:
-                        score+=2
+                        score+=4
 
-    print ("Score on collatz: {} out of 10.".format(score))
+    print ("Score on collatz: {} out of 20.".format(score))
     return score
 
 if __name__ == '__main__':

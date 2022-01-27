@@ -33,10 +33,10 @@ int main() {
   // 500 = 256 + 128 + 64 + 32 + 16 + 4
   // 500 = 0b1_11110100
   unsigned char* char_pointer = (unsigned char*) pointer;
-  printf ("byte at %ld = %d\n", (long int) char_pointer+0, *(char_pointer+0));
-  printf ("byte at %ld = %d\n", (long int) char_pointer+1, *(char_pointer+1));
-  printf ("byte at %ld = %d\n", (long int) char_pointer+2, *(char_pointer+2));
-  printf ("byte at %ld = %d\n", (long int) char_pointer+3, *(char_pointer+3));
+  printf ("byte at %ld = %d\n", (long int) (char_pointer+0), *(char_pointer+0));
+  printf ("byte at %ld = %d\n", (long int) (char_pointer+1), *(char_pointer+1));
+  printf ("byte at %ld = %d\n", (long int) (char_pointer+2), *(char_pointer+2));
+  printf ("byte at %ld = %d\n", (long int) (char_pointer+3), *(char_pointer+3));
 
   printf ("\n\nLESSON 5: POINTERS ARE JUST VARIABLES THAT LIVE IN MEMORY TOO\n");
   unsigned int** pointer_to_pointer = &pointer;

@@ -41,6 +41,7 @@ int main() {
   printf ("\n\nLESSON 5: POINTERS ARE JUST VARIABLES THAT LIVE IN MEMORY TOO\n");
   unsigned int** pointer_to_pointer = &pointer;
   printf ("  pointer_to_pointer = %ld\n", (long int) pointer_to_pointer);
+  printf (" *pointer_to_pointer = %ld\n", (long int) *pointer_to_pointer);
   printf ("**pointer_to_pointer = %d\n", **pointer_to_pointer);
 
   printf ("\n\nLESSON 6: ARRAYS\n");
@@ -56,6 +57,29 @@ int main() {
   for (int i=0; i<array_size; i++) {
     printf("*(array+%d) = %d\n", i, *(array+i));
   }
+
+  printf ("\n\nLESSON 6.1: 2D ARRAYS\n");
+  array_size = 3;
+  int** array_2d = calloc( array_size, sizeof(int*) );
+  for ( int i=0; i<array_size; i++ ) {
+    array_2d[i] = calloc( array_size, sizeof(int) );
+  }
+
+  for (int i=0; i<array_size; i++) { // iterate over rows
+    for (int j=0; j<array_size; j++) { // iterate over columns
+      array_2d[i][j] = i*1000+j*10;
+      // printf("%d ",  array_2d[i][j] ); // valid array notation
+      // printf("%d ",  *(array_2d[i]+j) ); // valid pointer arithmetic on the columns followed by dereferencing
+      // printf("%d ",  (*(array_2d+i))[j] ); // valid pointer arithmetic on the rows followed by array access
+      printf("%d ",  *(*(array_2d+i)+j) ); // valid pointer arithmetic on both rows and columns followed by dereferencing
+    }
+    printf("\n");
+  }
+  for ( int i=0; i<array_size; i++ ) {
+    free(array_2d[i]);
+  }
+  free(array_2d);
+
 
   printf ("\n\nLESSON 7: PASSING-BY-VALUE\n");
   int a = 211;

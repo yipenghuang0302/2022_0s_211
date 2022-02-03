@@ -1,6 +1,9 @@
 // C program to print a list of jobs sorted according to time
 // Sorting is done using insertion sort
 // Jobs are stored in sorted order using linked list
+// Authors:
+// Naishal Patel @naishal
+// Yipeng Huang @yipenghuang0302
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,7 +23,9 @@ void sorted_insert (
 
     // Allocate node
     struct node* new_node = (struct node*) malloc (sizeof(struct node));
+    // (*new_node).time = time;
     new_node->time = time;
+    // (*new_node).job = job;
     new_node->job = job;
 
     // Special case for empty list or if new node should be at front

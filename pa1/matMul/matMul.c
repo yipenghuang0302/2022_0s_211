@@ -9,7 +9,7 @@ void matMul (
     unsigned int n,
     int** matrix_a,
     int** matrix_b,
-    int*** matMulProduct
+    int** matMulProduct
 ) {
 
     // printf("l=%d\n", l);
@@ -20,9 +20,9 @@ void matMul (
         // printf("i=%d\n", i);
         for ( unsigned int k=0; k<n; k++ ) {
             // printf("k=%d\n", k);
-            (*matMulProduct)[i][k] = 0;
+            matMulProduct[i][k] = 0;
             for ( unsigned int j=0; j<m; j++ ) {
-                (*matMulProduct)[i][k] += matrix_a[i][j] * matrix_b[j][k];
+                matMulProduct[i][k] += matrix_a[i][j] * matrix_b[j][k];
             }
         }
     }
@@ -95,7 +95,7 @@ int main(int argc, char* argv[])
         matMulProduct[i] = calloc( length_n, sizeof(int) );
     }
 
-    matMul ( length_l, length_m, length_n, matrix_a, matrix_b, &matMulProduct );
+    matMul ( length_l, length_m, length_n, matrix_a, matrix_b, matMulProduct );
     for ( unsigned int i=0; i<length_l; i++ ) {
         for ( unsigned int k=0; k<length_n; k++ ) {
             printf ("%d ", matMulProduct[i][k]);

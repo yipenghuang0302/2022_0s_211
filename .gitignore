@@ -59,6 +59,8 @@ dkms.conf
 *.png
 submissions.zip
 submissions
+*_submissions
+moss
 answer_key
 *.csv
 *.xls

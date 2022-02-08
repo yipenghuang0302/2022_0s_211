@@ -2,47 +2,56 @@
 #include <stdio.h>
 #include <string.h>
 
-typedef struct Node Node;
-struct Node {
+// LINKED LIST IMPLEMENTATION OF QUEUE
+
+// queue needed for level order traversal
+typedef struct QueueNode QueueNode;
+struct QueueNode {
     unsigned char data;
-    Node* next;
+    struct QueueNode* next; // pointer to next node in linked list
+};
+struct Queue {
+    struct QueueNode* front; // front (head) of the queue
+    struct QueueNode* back; // back (tail) of the queue
 };
 
-typedef struct Queue {
-    Node* front;
-    Node* back;
-} Queue;
+typedef struct Queue Queue;
 
 // Append the new node to the back of the queue
 void enqueue ( Queue* queue, unsigned char data ) {
-    Node* node = malloc(sizeof(Node));
-    node -> data = data;
-    node -> next = NULL;
+    QueueNode* queueNode = malloc(sizeof(QueueNode));
+    queueNode -> data = data;
+    queueNode -> next = NULL; // At back of the queue, there is no next node.
 
-    if (queue->back==NULL) {
-        queue->back = node;
-        queue->front = node;
+    if (queue->back==NULL) { // If the Queue is currently empty
+        queue->front = queueNode;
+        queue->back = queueNode;
     } else {
-        queue->back->next = node;
-        queue->back = node;
+        queue->back->next = queueNode;
+        queue->back = queueNode;
     }
 
     return;
 }
 
-// Remove node from the front of the queue
+// Remove a QueueNode from the front of the Queue
 unsigned char dequeue ( Queue* queue ) {
-    if (queue->front != NULL) {
-        Node* temp = queue->front;
-        char data = temp->data;
+
+    if (queue->front==NULL) { // If the Queue is currently empty
+        return '\0';
+    } else {
+
+        // The QueueNode at front of the queue to be removed
+        QueueNode* temp = queue->front;
+        unsigned char data = temp->data;
+
         queue->front = temp->next;
-        if (queue->back==temp) { // if this was the last node in queue
+        if (queue->back==temp) { // If the Queue will become empty
             queue->back = NULL;
         }
+
         free(temp);
         return data;
-    } else {
-        return '\0';
     }
 }
 
@@ -54,8 +63,7 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
-    Queue queue;
-    queue.front = queue.back = NULL;
+    Queue queue = { .front = NULL, .back = NULL };
 
     char buff[8];
     while ( fscanf(fp, "%s", buff) != -1 ) {
@@ -70,7 +78,6 @@ int main(int argc, char* argv[]) {
             return EXIT_FAILURE;
         }
     }
-
 
     while (queue.front) {
         unsigned char data = dequeue(&queue);

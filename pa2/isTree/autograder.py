@@ -99,17 +99,17 @@ def grade_isTree( path="./", verbose=False ):
         return score
 
     if test_isTree(0,path,verbose):
-        score += 4
+        score += 3
         if test_isTree(1,path,verbose):
-            score += 4
+            score += 3
             if test_isTree(2,path,verbose):
-                score += 4
+                score += 3
                 if test_isTree(3,path,verbose):
-                    score += 4
+                    score += 3
                     if test_isTree(4,path,verbose):
-                        score += 4
+                        score += 3
                         if test_isTree(5,path,verbose):
-                            score += 4
+                            score += 3
 
                             allpass = True
                             for filenum in range(6,20):
@@ -117,9 +117,9 @@ def grade_isTree( path="./", verbose=False ):
                                 generate_test ( filenum, isTree, 16, 256, path )
                                 allpass &= test_isTree(filenum,path,verbose)
                             if allpass:
-                                score += 6
+                                score += 7
 
-    print ("Score on isTree: {} out of 30.".format(score))
+    print ("Score on isTree: {} out of 25.".format(score))
     return score
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import datetime
 import random
 import subprocess
 
@@ -32,17 +33,17 @@ class BinarySearchTreeNode:
         string += self.l.reverse_order_traversal() if self.l else ""
         return string
 
-def generate_test ( filenum, length, prefix=None ):
+def generate_test ( filenum, length, path="./" ):
 
     root = BinarySearchTreeNode()
 
-    with open("{}tests/test{}.txt".format(prefix if prefix else "",filenum), "w") as infile:
+    with open("{}tests/test{}.txt".format(path,filenum), "w") as infile:
         for _ in range (length):
             val = random.randrange(2*length)
             root.insert(val)
             infile.write("{} ".format(val))
 
-    with open("{}answers/answer{}.txt".format(prefix if prefix else "",filenum), "w") as outfile:
+    with open("{}answers/answer{}.txt".format(path,filenum), "w") as outfile:
         outfile.write(root.reverse_order_traversal())
 
 def generate_test_suite():
@@ -57,65 +58,72 @@ def generate_test_suite():
     generate_test ( 2, 4 )
     generate_test ( 3, 8 )
 
-def test_bstReverseOrder ( filenum, prefix=None, verbose=False ):
-
-    command = prefix if prefix else "."
-    command += "/bstReverseOrder {}tests/test{}.txt".format(prefix if prefix else "",filenum)
-    if verbose:
-        print (command)
+def test_bstReverseOrder ( filenum, path="./", verbose=False ):
 
     try:
-        with open("{}answers/answer{}.txt".format(prefix if prefix else "",filenum), "r") as outfile:
+        with open("{}answers/answer{}.txt".format(path,filenum), "r") as outfile:
             answer = [ int(num) for num in outfile.read().split() ]
     except EnvironmentError: # parent of IOError, OSError
         print ("answers/answer{}.txt missing".format(filenum))
 
     try:
-        result = subprocess.check_output(command, shell=True).decode('ascii')
-        resultlist = [int(string) for string in result.split()]
-        # print ("answer")
-        # print (answer)
-        # print ("result")
-        # print (result)
+        result = subprocess.run(
+            ["./bstReverseOrder", "tests/test{}.txt".format(filenum)],
+            cwd=path,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            encoding="ASCII",
+            timeout=datetime.timedelta(seconds=2).total_seconds(),
+        )
+
+        resultlist = [int(string) for string in result.stdout.split()]
+
+        if verbose:
+            print (' '.join(result.args))
+            # print ("answer")
+            # print (answer)
+            # print ("resultlist")
+            # print (resultlist)
         assert resultlist == answer, "The breadth first traversal of the bst doesn't match answers/answer{}.txt.".format(filenum)
         return True
     except subprocess.CalledProcessError as e:
-        # print (e.output)
-        print ("Calling ./bstReverseOrder returned non-zero exit status.")
+        print (e.output)
+        print ("Calling ./bstReverseOrder returned an error.")
+    except ValueError as e:
+        print (' '.join(result.args))
+        print (result.stdout)
+        print ("Please check your output formatting.")
     except AssertionError as e:
-        print (result)
+        print (result.stdout)
         print (e.args[0])
 
     return False
 
-def grade_bstReverseOrder( prefix=None, verbose=False ):
+def grade_bstReverseOrder( path="./", verbose=False ):
 
     score = 0
 
-    command = "make"
-    if prefix:
-        command += " --directory=" + prefix
-    if verbose:
-        print (command)
     try:
-        subprocess.check_output(command, shell=True)
+        subprocess.run( ["make", "clean"], cwd=path, check=True, )
+        subprocess.run( ["make", "-B"], cwd=path, check=True, )
     except subprocess.CalledProcessError as e:
-        print ("Couldn't compile bstReverseOrder.")
+        print ("Couldn't compile bstReverseOrder.c.")
         return score
 
-    if test_bstReverseOrder(0,prefix,verbose):
+    if test_bstReverseOrder(0,path,verbose):
         score += 5
-        if test_bstReverseOrder(1,prefix,verbose):
+        if test_bstReverseOrder(1,path,verbose):
             score += 5
-            if test_bstReverseOrder(2,prefix,verbose):
+            if test_bstReverseOrder(2,path,verbose):
                 score += 5
-                if test_bstReverseOrder(3,prefix,verbose):
+                if test_bstReverseOrder(3,path,verbose):
                     score += 5
 
                     allpass = True
                     for filenum in range(4,8):
-                        generate_test ( filenum, 1024, prefix )
-                        allpass &= test_bstReverseOrder(filenum,prefix,verbose)
+                        generate_test ( filenum, 1024, path )
+                        allpass &= test_bstReverseOrder(filenum,path,verbose)
                     if allpass:
                         score += 5
 

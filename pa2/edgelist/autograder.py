@@ -92,22 +92,22 @@ def grade_edgelist( path="./", verbose=False ):
         return score
 
     if test_edgelist(0,path,verbose):
-        score += 6
+        score += 5
         if test_edgelist(1,path,verbose):
-            score += 6
+            score += 5
             if test_edgelist(2,path,verbose):
-                score += 6
+                score += 5
                 if test_edgelist(3,path,verbose):
-                    score += 6
+                    score += 5
 
                     allpass = True
                     for filenum in range(4,8):
                         generate_test ( filenum, 256, 1024, path=path )
                         allpass &= test_edgelist(filenum,path,verbose)
                     if allpass:
-                        score += 6
+                        score += 5
 
-    print ("Score on edgelist: {} out of 30.".format(score))
+    print ("Score on edgelist: {} out of 25.".format(score))
     return score
 
 if __name__ == '__main__':

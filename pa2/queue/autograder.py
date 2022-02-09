@@ -89,22 +89,22 @@ def grade_queue( path="./", verbose=False ):
         return score
 
     if test_queue(0,path,verbose):
-        score += 6
+        score += 5
         if test_queue(1,path,verbose):
-            score += 6
+            score += 5
             if test_queue(2,path,verbose):
-                score += 6
+                score += 5
                 if test_queue(3,path,verbose):
-                    score += 6
+                    score += 5
 
                     allpass = True
                     for filenum in range(4,12):
                         generate_test ( filenum=filenum, length=65536, path=path )
                         allpass &= test_queue(filenum,path,verbose)
                     if allpass:
-                        score += 6
+                        score += 5
 
-    print ("Score on queue: {} out of 30.".format(score))
+    print ("Score on queue: {} out of 25.".format(score))
     return score
 
 if __name__ == '__main__':

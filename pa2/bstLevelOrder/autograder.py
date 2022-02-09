@@ -109,22 +109,22 @@ def grade_bstLevelOrder( prefix=None, verbose=False ):
         return score
 
     if test_bstLevelOrder(0,prefix,verbose):
-        score += 6
+        score += 5
         if test_bstLevelOrder(1,prefix,verbose):
-            score += 6
+            score += 5
             if test_bstLevelOrder(2,prefix,verbose):
-                score += 6
+                score += 5
                 if test_bstLevelOrder(3,prefix,verbose):
-                    score += 6
+                    score += 5
 
                     allpass = True
                     for filenum in range(4,8):
                         generate_test ( filenum, 1024, prefix )
                         allpass &= test_bstLevelOrder(filenum,prefix,verbose)
                     if allpass:
-                        score += 6
+                        score += 5
 
-    print ("Score on bstLevelOrder: {} out of 30.".format(score))
+    print ("Score on bstLevelOrder: {} out of 25.".format(score))
     return score
 
 if __name__ == '__main__':

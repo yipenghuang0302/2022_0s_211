@@ -130,26 +130,26 @@ def grade_balanced( path="./", verbose=False ):
         return score
 
     if test_balanced(0,path,verbose):
-        score += 4
+        score += 3
         if test_balanced(1,path,verbose):
-            score += 4
+            score += 3
             if test_balanced(2,path,verbose):
-                score += 4
+                score += 3
                 if test_balanced(3,path,verbose):
-                    score += 4
+                    score += 3
                     if test_balanced(4,path,verbose):
-                        score += 4
+                        score += 3
                         if test_balanced(5,path,verbose):
-                            score += 4
+                            score += 3
 
                             allpass = True
                             for filenum in range(6,12):
                                 generate_test ( filenum, 256, 0.99, path )
                                 allpass &= test_balanced(filenum,path,verbose)
                             if allpass:
-                                score += 6
+                                score += 7
 
-    print ("Score on balanced: {} out of 30.".format(score))
+    print ("Score on balanced: {} out of 25.".format(score))
     return score
 
 if __name__ == '__main__':

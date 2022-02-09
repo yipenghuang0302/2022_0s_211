@@ -75,13 +75,14 @@ def test_findCycle ( filenum, path="./", verbose=False ):
                 if rotate(resultCycle,rot) in answerCycles:
                     resultInAnswer = True
 
-        if verbose:
-            print (' '.join(result.args))
-            # print ("answerCycles")
-            # print (answerCycles)
-            # print ("resultCycle")
-            # print (resultCycle)
-        assert resultInAnswer, "Your answer doesn't match answers/answer{}.txt.".format(filenum)
+            if verbose:
+                print (' '.join(result.args))
+                # print ("answerCycles")
+                # print (answerCycles)
+                # print ("resultCycle")
+                # print (resultCycle)
+            assert resultInAnswer, "Your answer doesn't match answers/answer{}.txt.".format(filenum)
+
         return True
     except subprocess.CalledProcessError as e:
         print (e.output)

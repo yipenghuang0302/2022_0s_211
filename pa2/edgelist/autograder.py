@@ -70,6 +70,10 @@ def test_edgelist ( filenum, path="./", verbose=False ):
     except subprocess.CalledProcessError as e:
         print (e.output)
         print ("Calling ./edgelist returned an error.")
+    except TypeError as e:
+        print (' '.join(result.args))
+        print (result.stdout)
+        print ("Please check your output formatting.")
     except ValueError as e:
         print (' '.join(result.args))
         print (result.stdout)

@@ -4,7 +4,7 @@ import os
 import datetime
 import scipy
 import networkx as nx
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import subprocess
 
 def generate_test ( filenum, nodes, edges, path="./" ):

@@ -141,7 +141,7 @@ def grade_doubleToBin( path='./', verbose=False ):
 
                             # negative zero test
                             generate_test ( 18, -0.0, path=path )
-                            if test_doubleToBin(16,path,verbose):
+                            if test_doubleToBin(18,path,verbose):
                                 score += 1
 
     print ("Score on doubleToBin: {} out of 25.".format(score))

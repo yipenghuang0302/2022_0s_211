@@ -1,4 +1,4 @@
-OUTPUT=2_greater_than
+OUTPUT=3_branch
 CC=gcc
 CFLAGS= -Og -Wall -Werror -std=c99
 ASM = swap.s

@@ -1,4 +1,4 @@
-OUTPUT=swap
+OUTPUT=6_arithmetic
 CC=gcc
 CFLAGS= -Og -Wall -Werror -std=c99
 ASM = swap.s

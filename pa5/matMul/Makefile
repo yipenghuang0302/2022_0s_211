@@ -3,10 +3,10 @@ CFLAGS=-Wall -Werror -m64
 # -fsanitize=address
 
 %: %.c %.h
-	gcc $(CFLAGS) -O3 -o $@ $<
+	gcc $(CFLAGS) -O0 -o $@ $<
 
 %: %.c
-	gcc $(CFLAGS) -O3 -o $@ $<
+	gcc $(CFLAGS) -O0 -o $@ $<
 
 all: $(OUTPUT)
 

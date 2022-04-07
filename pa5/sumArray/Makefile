@@ -1,5 +1,5 @@
 OUTPUT=sumArray
-CFLAGS=-O0 -g -Wall -Werror -std=c99
+CFLAGS=-Og -Wall -Werror -std=c99
 # -floop-interchange
 # -floop-nest-optimize
 LFLAGS=-lm
